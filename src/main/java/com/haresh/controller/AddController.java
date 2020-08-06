@@ -1,15 +1,27 @@
 package com.haresh.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class AddController
 {
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String add() {
-		return "display.jsp";
+	public ModelAndView add(HttpServletRequest request, HttpServletResponse response) {
+		int x = Integer.parseInt(request.getParameter("no1"));
+		int y = Integer.parseInt(request.getParameter("no2"));
+		int z = x + y;
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("display.jsp");
+		mv.addObject("result", z);
+		return mv;
 	}
 	
 }
